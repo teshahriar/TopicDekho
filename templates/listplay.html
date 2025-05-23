@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='listplay.css') }}">
+{% endblock %}
+
+{% block title %}All Playlists{% endblock %}
+
+{% block content %}
+  {% for playlist in playlists %}
+  <section class="playlist-container">
+    <div class="playlist-header" onclick="togglePlaylist(this)">
+      <h3>{{ playlist.subject }} - {{ playlist.chapter }}</h3>
+
+      {% if playlist.videos|length > 0 %}
+      <a href="{{ url_for('watch', video_id=playlist.videos[0].id) }}" class="first-video" title="{{ playlist.videos[0].title }}">
+        <img
+          src="{{ playlist.videos[0].thumbnail }}"
+          alt="{{ playlist.videos[0].title }} thumbnail"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='https://via.placeholder.com/160x90?text=No+Image';"
+        />
+        <p>{{ playlist.videos[0].title }}</p>
+      </a>
+      {% endif %}
+
+      <button class="toggle-btn">▶</button>
+    </div>
+
+    <div class="videos-grid collapsed">
+      {% for video in playlist.videos %}
+      <a href="{{ url_for('watch', video_id=video.id) }}" class="video-card" title="{{ video.title }}">
+        <img
+          src="{{ video.thumbnail }}"
+          alt="{{ video.title }} thumbnail"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='https://via.placeholder.com/160x90?text=No+Image';"
+        />
+        <p class="video-title">{{ video.title }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+  function togglePlaylist(headerElem) {
+    // Find the sibling videos grid container
+    const playlistSection = headerElem.parentElement;
+    const videosGrid = playlistSection.querySelector('.videos-grid');
+    const toggleBtn = headerElem.querySelector('.toggle-btn');
+    
+    if (videosGrid.classList.contains('collapsed')) {
+      videosGrid.classList.remove('collapsed');
+      toggleBtn.style.transform = 'rotate(90deg)';
+    } else {
+      videosGrid.classList.add('collapsed');
+      toggleBtn.style.transform = 'rotate(0deg)';
+    }
+  }
+</script>
+
+{% endblock %}

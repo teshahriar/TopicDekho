@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='play.css') }}">
+{% endblock %}
+
+{% block title %}Create Playlist{% endblock %}
+
+{% block content %}
+<h1>Create Playlist</h1>
+<div class="create-playlist-page">
+<form method="POST" action="{{ url_for('create_playlist') }}">
+    <div style="margin-bottom: 15px;">
+        <label for="subject">Select Subject:</label><br />
+        <select name="subject" id="subject" required onchange="updateChapters()">
+            <option value="" disabled selected>-- Choose a Subject --</option>
+            {% for subject in syllabus.keys() %}
+                <option value="{{ subject }}">{{ subject }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="chapter">Select Chapter:</label><br />
+        <select name="chapter" id="chapter" required>
+            <option value="" disabled selected>-- Select a Subject First --</option>
+        </select>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="video_ids">Select Videos:</label><br />
+        <select name="video_ids" id="video_ids" multiple size="6" required style="width: 100%;">
+            {% for video in videos %}
+                <option value="{{ video._id }}">{{ video.title }}</option>
+            {% endfor %}
+        </select>
+        <small>Hold Ctrl (Cmd on Mac) to select multiple videos.</small>
+    </div>
+
+    <button type="submit">Create Playlist</button>
+</form>
+</div>
+<script>
+    const syllabus = {{ syllabus|tojson }};
+    const chapterSelect = document.getElementById('chapter');
+    const subjectSelect = document.getElementById('subject');
+
+    function updateChapters() {
+        const selectedSubject = subjectSelect.value;
+        const chapters = syllabus[selectedSubject] || [];
+
+        // Clear current options
+        chapterSelect.innerHTML = '';
+
+        if (chapters.length === 0) {
+            const option = document.createElement('option');
+            option.textContent = '-- No chapters available --';
+            option.disabled = true;
+            chapterSelect.appendChild(option);
+        } else {
+            // Add default prompt
+            const defaultOption = document.createElement('option');
+            defaultOption.textContent = '-- Choose a Chapter --';
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            chapterSelect.appendChild(defaultOption);
+
+            // Populate chapters
+            chapters.forEach(chap => {
+                const option = document.createElement('option');
+                option.value = chap;
+                option.textContent = chap;
+                chapterSelect.appendChild(option);
+            });
+        }
+    }
+</script>
+{% endblock %}
