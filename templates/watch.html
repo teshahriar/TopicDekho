@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='watch.css') }}">
 {% endblock %}
 {% block content %}
-  <h2>{{ video.title }} - ({{ v.start }} - {{ v.end }})</h2>
+  <h2>{{ video.title }} - ({{ video.start }} - {{ video.end }})</h2>
   <div class="video-container">
     <div id="player"></div>
   </div>
