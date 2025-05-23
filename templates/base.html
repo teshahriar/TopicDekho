@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg">
+  <title>TopicDekho</title>
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <img src="https://i.postimg.cc/vZW8XK3j/Chat-GPT-Image-May-23-2025-04-10-30-AM-removebg-preview.png" alt="TopicDekho Logo" />
+    </a>
+    <form action="/search" method="get">
+      <input type="text" name="q" placeholder="Search topic" />
+      <button type="submit" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+    {% if session.get('admin') %}
+      <a href="/admin/dashboard">Dashboard</a>
+      <a href="/admin/logout">Logout</a>
+    {% else %}
+      <a href="/request"><i class="fa-solid fa-bullhorn"></i> Request for TopicDekho</a>
+      <a href="/admin/login"><i class="fa-solid fa-upload"></i> Admin</a>
+    {% endif %}
+  </nav>
+  <hr />
+
+  {% block content %}{% endblock %}
+
+<footer>
+  <p>Made by <strong>TeslaTech</strong></p>
+</footer>
+
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+</body>
+</html>

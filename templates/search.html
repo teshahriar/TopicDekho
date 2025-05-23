@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}">
+{% endblock %}
+{% block content %}
+  <h2>Search Results for "{{ query }}"</h2>
+  
+  {% if videos|length == 0 %}
+    <p>No videos found matching your search.</p>
+  {% else %}
+    <ul class="video-list">
+      {% for v in videos %}
+        <li>
+          <a href="{{ url_for('watch', video_id=v._id) }}" class="thumbnail-link">
+            <img src="https://img.youtube.com/vi/{{ v.youtube_id }}/hqdefault.jpg" alt="{{ v.title }} thumbnail" class="thumbnail" />
+          </a>
+          <div class="video-info">
+            <a href="{{ url_for('watch', video_id=v._id) }}">{{ v.title }}</a>
+            <span class="video-time">({{ v.start }} - {{ v.end }})</span>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

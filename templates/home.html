@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+{% endblock %}
+
+{% block content %}
+  <h1 style="text-align:center; margin: 2rem 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50;">
+    Recent Videos
+  </h1>
+
+  {% if videos and videos|length > 0 %}
+    <ul class="video-list">
+      {% for v in videos %}
+        <li>
+          <a href="{{ url_for('watch', video_id=v._id) }}" class="thumbnail" aria-label="{{ v.title }}">
+            <img src="https://img.youtube.com/vi/{{ v.youtube_id }}/hqdefault.jpg" alt="{{ v.title }} thumbnail" />
+          </a>
+          <div class="video-info">
+            <a href="{{ url_for('watch', video_id=v._id) }}" class="title">{{ v.title }}</a>
+            <div class="time">({{ v.start }} - {{ v.end }})</div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p style="text-align:center; color: #666; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      No videos found.
+    </p>
+  {% endif %}
+{% endblock %}

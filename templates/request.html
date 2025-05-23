@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='request.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="request-container">
+  <h2>Request a Topic</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-message">
+        {% for category, message in messages %}
+          <p class="flash {{ category }}">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form action="/request" method="POST">
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="telegram">Telegram Username or Number</label>
+    <input type="text" id="telegram" name="telegram" required>
+
+    <label for="topic">Topic</label>
+    <textarea id="topic" name="topic" rows="4" required></textarea>
+
+    <button type="submit">Submit Request</button>
+  </form>
+</div>
+
+<div class="contact-icons">
+  <p>Contact us:</p>
+  <a href="https://t.me/your_username" target="_blank"><i class="fab fa-telegram fa-2x"></i></a>
+  <a href="mailto:youremail@example.com"><i class="fas fa-envelope fa-2x"></i></a>
+  <a href="https://facebook.com/yourpage" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
+</div>
+{% endblock %}

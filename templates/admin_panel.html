@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='panel.css') }}">
+{% endblock %}
+{% block content %}
+  <div class="video-panel">
+    <h2>Add New Video</h2>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="flash {{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    
+    <form method="post" autocomplete="off">
+      <div>
+        <label for="title">Video Title</label><br>
+        <input type="text" id="title" name="title" placeholder="Video Title" required>
+      </div>
+      <div>
+        <label for="youtube">YouTube Link</label><br>
+        <input type="url" id="youtube" name="youtube" placeholder="https://youtu.be/xyz or https://www.youtube.com/watch?v=xyz" required>
+      </div>
+      <div>
+        <label for="start">Start Time (mm:ss or hh:mm:ss)</label><br>
+        <input type="text" id="start" name="start" placeholder="e.g. 2:58" pattern="^(\d+:)?[0-5]?\d:[0-5]\d$" title="Format: mm:ss or hh:mm:ss" required>
+      </div>
+      <div>
+        <label for="end">End Time (mm:ss or hh:mm:ss)</label><br>
+        <input type="text" id="end" name="end" placeholder="e.g. 25:09" pattern="^(\d+:)?[0-5]?\d:[0-5]\d$" title="Format: mm:ss or hh:mm:ss" required>
+      </div>
+      <button type="submit">Add Video</button>
+    </form>
+  </div>
+{% endblock %}

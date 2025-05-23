@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+{% block content %}
+  <div class="login-panel">
+    <h2>Admin Login</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="flash {{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" autocomplete="off">
+      <div>
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" placeholder="Username" required>
+      </div>
+      <div>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+{% endblock %}
