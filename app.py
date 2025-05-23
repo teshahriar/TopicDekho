@@ -91,15 +91,14 @@ def admin_dashboard():
             return redirect(url_for("admin_dashboard"))
 
         # Extract YouTube video ID from link
+        youtube_id = ""
         if "v=" in yt_link:
             youtube_id = yt_link.split("v=")[-1].split("&")[0]
+        elif "youtu.be/" in yt_link:
+            youtube_id = yt_link.split("youtu.be/")[-1].split("?")[0]
         else:
-            # Support shortened URLs like youtu.be
-            if "youtu.be/" in yt_link:
-                youtube_id = yt_link.split("youtu.be/")[-1].split("?")[0]
-            else:
-                flash("Invalid YouTube link format", "danger")
-                return redirect(url_for("admin_dashboard"))
+            flash("Invalid YouTube link format", "danger")
+            return redirect(url_for("admin_dashboard"))
 
         # Convert start and end time to seconds
         start_sec = time_to_seconds(start)
@@ -109,9 +108,12 @@ def admin_dashboard():
             flash("Start time must be less than end time", "danger")
             return redirect(url_for("admin_dashboard"))
 
+        # Generate unique ID for the video clip
+        clip_id = f"{youtube_id}_{start_sec}_{end_sec}"
+
         # Prepare video document
         video_doc = {
-            "_id": youtube_id,
+            "_id": clip_id,
             "title": title,
             "youtube_id": youtube_id,
             "start": start,
@@ -123,8 +125,8 @@ def admin_dashboard():
 
         try:
             # Insert or update video (upsert)
-            videos.update_one({"_id": youtube_id}, {"$set": video_doc}, upsert=True)
-            flash("Video added/updated successfully!", "success")
+            videos.update_one({"_id": clip_id}, {"$set": video_doc}, upsert=True)
+            flash("Video clip added/updated successfully!", "success")
         except Exception as e:
             flash(f"Database error: {str(e)}", "danger")
 
@@ -133,6 +135,7 @@ def admin_dashboard():
     # GET request: show all videos for admin
     all_videos = list(videos.find().sort("added_on", -1))
     return render_template("admin_panel.html", videos=all_videos)
+
 
 @app.route('/request', methods=['GET', 'POST'])
 def request_topic():
