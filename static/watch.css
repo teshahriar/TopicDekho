@@ -1,0 +1,43 @@
+/* watc.css */
+
+h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin: 2rem 0 1.5rem;
+  font-weight: 700;
+  font-size: 2.2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.video-container {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #000;
+  position: relative;
+  /* Maintain 16:9 aspect ratio */
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+#player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: none;
+  border-radius: 12px;
+  background: #000;
+  box-sizing: border-box;
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px) {
+  .video-container {
+    max-width: 100%;
+    padding-bottom: 56.25%; /* keeps aspect ratio */
+  }
+}

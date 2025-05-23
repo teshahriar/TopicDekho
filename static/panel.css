@@ -1,0 +1,89 @@
+.video-panel {
+  max-width: 480px;
+  margin: 1.5rem auto;
+  padding: 1.5rem 2rem;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.video-panel h2 {
+  margin-bottom: 1.2rem;
+  color: #222;
+  font-weight: 700;
+  text-align: center;
+}
+
+.video-panel .flashes {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.video-panel .flashes .flash {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.8rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.video-panel .flashes .flash.error {
+  background-color: #ffdddd;
+  color: #b30000;
+  border: 1px solid #b30000;
+}
+
+.video-panel .flashes .flash.success {
+  background-color: #ddffdd;
+  color: #0a8a0a;
+  border: 1px solid #0a8a0a;
+}
+
+/* Form styles */
+.video-panel form div {
+  margin-bottom: 1.2rem;
+}
+
+.video-panel label {
+  font-weight: 600;
+  color: #444;
+  display: block;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+}
+
+.video-panel input[type="text"],
+.video-panel input[type="url"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+.video-panel input[type="text"]:focus,
+.video-panel input[type="url"]:focus {
+  outline: none;
+  border-color: #2c7be5;
+  box-shadow: 0 0 6px rgba(44, 123, 229, 0.5);
+}
+
+.video-panel button[type="submit"] {
+  background-color: #2c7be5;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.video-panel button[type="submit"]:hover {
+  background-color: #1a5fcc;
+}

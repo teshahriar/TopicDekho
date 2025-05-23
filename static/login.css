@@ -1,0 +1,89 @@
+.login-panel {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem 2.5rem;
+  background-color: #f5f6fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-panel h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.login-panel .flashes {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.login-panel .flashes .flash {
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 0.75rem;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.login-panel .flashes .flash.error {
+  background-color: #ffe1e1;
+  border: 1px solid #e74c3c;
+  color: #c0392b;
+}
+
+.login-panel .flashes .flash.success {
+  background-color: #e1f7e7;
+  border: 1px solid #27ae60;
+  color: #2ecc71;
+}
+
+.login-panel form div {
+  margin-bottom: 1.3rem;
+}
+
+.login-panel label {
+  display: block;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+}
+
+.login-panel input[type="text"],
+.login-panel input[type="password"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1.7px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.25s ease;
+}
+
+.login-panel input[type="text"]:focus,
+.login-panel input[type="password"]:focus {
+  border-color: #2980b9;
+  outline: none;
+  box-shadow: 0 0 7px rgba(41, 128, 185, 0.5);
+}
+
+.login-panel button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  background-color: #2980b9;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-panel button[type="submit"]:hover {
+  background-color: #1c5980;
+}

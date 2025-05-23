@@ -1,0 +1,140 @@
+body {
+  background: #e0e7ff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  height: 100vh;
+}
+
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background-color: #f0f4ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav .logo img {
+  height: 60px;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* Style the form and links */
+nav form input[type="text"] {
+  padding: 0.3rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1.5px solid #aac4ff;
+  outline-offset: 2px;
+  outline-color: #5599ff;
+  max-width: 90%;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1a237e;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #0047b3;
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-top: 1px solid #ccc;
+  user-select: none;
+}
+
+footer strong.highlight {
+  color: #A6FF00;
+}
+
+
+@media (max-width: 600px) {
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  nav .logo {
+    flex: 1 1 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  nav .logo img {
+    height: 60px;
+  }
+
+  nav form {
+    flex: 1 1 100%;
+    max-width: 400px;
+    margin: 0 auto 0.5rem auto;
+  }
+
+  nav form input[type="text"] {
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1.5px solid #aac4ff;
+    outline-offset: 2px;
+    outline-color: #5599ff;
+  }
+
+nav form button {
+  margin-top: 1rem;
+  padding: 0.35rem 1rem;
+  font-size: 1rem;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav form button:hover {
+  background-color: #ffffff;
+}
+
+  nav a {
+    flex: 0 1 auto;
+    font-size: 0.95rem;
+    color: #1a237e;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+  }
+
+  nav a:hover {
+    color: #0047b3;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    padding: 1rem 1rem;
+    text-align: center;
+    border-top: 1px solid #ccc;
+  }
+
+
+    nav form button {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+  }
+}
+
