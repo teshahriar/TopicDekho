@@ -7,3 +7,4 @@ itsdangerous
 click
 gunicorn
 python-dotenv
+bson
