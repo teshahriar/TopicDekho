@@ -161,5 +161,66 @@ def request_topic():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
+@app.route('/listplay')
+def list_playlists():
+    playlists = list(playlists_collection.find())
+    
+    for playlist in playlists:
+        video_infos = []
+        for vid in playlist.get('video_ids', []):
+            # vid is YouTube video ID string like 'K-OzRLh5700'
+            video_doc = videos.find_one({"_id": vid})  # if _id in videos is also the YouTube ID string
+            if video_doc:
+                video_infos.append({
+                    "id": vid,
+                    "title": video_doc.get("title", "Untitled"),
+                    "thumbnail": f"https://img.youtube.com/vi/{vid}/hqdefault.jpg"
+                })
+        playlist["videos"] = video_infos
+    
+    return render_template('listplay.html', playlists=playlists)
+
+syllabus = {
+    "Bangla 1st Paper": ["Goddo", "Poddo", "Natok", "Uponnash"],
+    "Bangla 2nd Paper": ["Bekoron", "Nirmiti"],
+    "English 1st Paper": ["Reading Comprehension", "Writing"],
+    "English 2nd Paper": ["Grammer", "Writing"],
+    "ICT": ["Chapter 1", "Chapter 2", "Number system", "HTML", "C-programming"],
+    "Physics 1st Paper": ["ভৌতজগৎ ও পরিমাপ", "ভেক্টর", "নিউটনিয়ান বলবিদ্যা", "কাজ ক্ষমতা ও শক্তি", "মহাকর্ষ ও অভিকর্ষ", "পদার্থের গাঠনিক ধর্ম", "পর্যাবৃত্তিক গতি", "আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব"],
+    "Physics 2nd Paper": ["তাপগতিবিদ্যা", "স্থির তড়িৎ", "চল তড়িৎ", "ভৌত আলোকবিজ্ঞান", "আধুনিক আলোকবিজ্ঞান সূচনা", "পরমাণু মডেল এবং নিউক্লিয়ার পদার্থবিজ্ঞান", "সেমিকন্ডাক্টর"],
+    "Chemistry 1st Paper": ["গুণগত রসায়ন", "মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন", "রাসায়নিক পরিবর্তন", "কর্মমুখী রসায়ন"],
+    "Chemistry 2nd Paper": ["পরিবেশ রসায়ন", "জৈব রসায়ন", "পরিমাণগত রসায়ন", "তড়িৎ রসায়ন"],
+    "Biology 1st Paper": ["কোষ ও এর গঠন", "কোষ বিভাজন", "অণুজীব", "নগ্নবীজী ও আবৃতবীজী", "টিস্যু ও টিস্যুতন্ত্র", "উদ্ভিদ শারীরতত্ত্ব", "জীবপ্রযুক্তি"],
+    "Biology 2nd Paper": ["প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস", "প্রাণীর পরিচিতি", "পরিপাক ও শোষন", "রক্ত ও সঞ্চালন", "শ্বসন ও শ্বাসক্রিয়া", "চলন ও অঙ্গচালনা", "জিনতত্ত্ব ও বিবর্তন"],
+    "Higher Mathematics 1st Paper": ["ম্যাট্রিক্স ও নির্ণায়ক", "সরলরেখা", "বৃত্ত", "সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত", "অন্তরীকরণ", "যোগজীকরণ"],
+    "Higher Mathematics 2nd Paper": ["জটিল সংখ্যা", "বহুপদী ও বহুপদী সমীকরণ", "কনিক", "বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ","স্থিতিবিদ্যা", "সমতলে বস্তুকণার গতি"]
+}
+
+@app.route('/create_playlist', methods=['GET', 'POST'])
+def create_playlist():
+    if request.method == 'POST':
+        subject = request.form.get('subject')
+        chapter = request.form.get('chapter')
+        video_ids = request.form.getlist('video_ids')  
+        if not subject or not chapter or not video_ids:
+            flash("Please select subject, chapter and at least one video.")
+            return redirect(url_for('create_playlist'))
+
+        playlist_doc = {
+            "subject": subject,
+            "chapter": chapter,
+            "video_ids": video_ids, 
+            "hidden": True
+        }
+
+        playlists_collection.insert_one(playlist_doc)
+
+        flash("Playlist created successfully!")
+        return redirect(url_for('list_playlists'))
+
+    videos_list = list(videos.find())
+    return render_template('create_playlist.html', syllabus=syllabus, videos=videos_list)
+
 if __name__ == "__main__":
     app.run(debug=True)
