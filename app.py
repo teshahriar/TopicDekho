@@ -15,6 +15,7 @@ client = MongoClient(os.getenv("MONGO_URI"))
 db = client["topicdekho"]
 videos = db["videos"]
 request_collection = db['request']  
+playlists_collection = db['playlists']
 
 # Admin credentials
 ADMIN_USERNAME = "admin"
