@@ -1,0 +1,8 @@
+Flask
+pymongo
+dnspython
+Jinja2
+Werkzeug
+itsdangerous
+click
+gunicorn
