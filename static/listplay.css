@@ -1,0 +1,145 @@
+/* Container for each playlist */
+.playlist-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Playlist header */
+.playlist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  user-select: none;
+  gap: 15px;
+}
+
+/* Playlist title */
+.playlist-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  flex-grow: 1;
+  color: #202020;
+}
+
+/* First video link inside header */
+.first-video {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #000;
+  max-width: 60%;
+}
+
+.first-video img {
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.first-video p {
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 170px);
+}
+
+/* Toggle button */
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Grid of all videos */
+.videos-grid {
+  padding: 15px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+  gap: 15px;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  max-height: 2000px; /* large max height when expanded */
+  overflow: hidden;
+}
+
+/* Collapsed state hides all videos */
+.videos-grid.collapsed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Individual video cards */
+.video-card {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  background: #fafafa;
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.video-card:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.video-card img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  display: block;
+}
+
+.video-title {
+  margin: 8px 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .playlist-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .first-video {
+    max-width: 100%;
+  }
+  
+  .first-video img {
+    width: 140px;
+    height: 78px;
+  }
+  
+  .video-card img {
+    height: 70px;
+  }
+  
+  .video-title {
+    font-size: 0.85rem;
+  }
+}

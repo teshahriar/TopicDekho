@@ -1,0 +1,90 @@
+/* play.css scoped for Create Playlist page */
+.create-playlist-page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+
+.create-playlist-page h1 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #222;
+}
+
+.create-playlist-page form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.create-playlist-page label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  display: block;
+  color: #444;
+}
+
+.create-playlist-page select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  outline-offset: 2px;
+}
+
+.create-playlist-page select:focus {
+  border-color: #007BFF;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0,123,255,0.3);
+}
+
+.create-playlist-page select[multiple] {
+  height: auto;
+  min-height: 120px;
+}
+
+.create-playlist-page small {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.create-playlist-page button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #007BFF;
+  border: none;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-playlist-page button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .create-playlist-page form {
+    padding: 20px;
+  }
+
+  .create-playlist-page h1 {
+    font-size: 1.6rem;
+  }
+}
