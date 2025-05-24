@@ -181,7 +181,9 @@ def list_playlists():
                 video_infos.append({
                     "id": vid,
                     "title": video_doc.get("title", "Untitled"),
-                    "thumbnail": f"https://img.youtube.com/vi/{vid}/hqdefault.jpg"
+                    "thumbnail": f"https://img.youtube.com/vi/{vid}/hqdefault.jpg",
+                    "start_time": video_doc.get("start", "start"),
+                    "end_time": video_doc.get("end", "end"),
                 })
         playlist["videos"] = video_infos
     
