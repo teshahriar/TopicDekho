@@ -27,40 +27,34 @@
       <button class="toggle-btn">▶</button>
     </div>
 
-    <div class="videos-grid collapsed">
+    <ul class="video-list collapsed">
       {% for video in playlist.videos %}
-      <a href="{{ url_for('watch', video_id=video.id) }}" class="video-card" title="{{ video.title }}">
-        <img
-          src="{{ video.thumbnail }}"
-          alt="{{ video.title }} thumbnail"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='https://via.placeholder.com/160x90?text=No+Image';"
-        />
-        <p class="video-title">{{ video.title }}</p>
-      </a>
+      <li class="video-list-item">
+        <a href="{{ url_for('watch', video_id=video.id) }}">
+          <span class="video-title">{{ video.title }}</span>
+          <span class="video-time">{{ video.start_time or '00:00' }} - {{ video.end_time or '--:--' }}</span>
+        </a>
+      </li>
       {% endfor %}
-    </div>
+    </ul>
   </section>
   {% endfor %}
 {% endblock %}
 
 {% block extra_js %}
-
 <script>
   function togglePlaylist(headerElem) {
-    // Find the sibling videos grid container
     const playlistSection = headerElem.parentElement;
-    const videosGrid = playlistSection.querySelector('.videos-grid');
+    const videoList = playlistSection.querySelector('.video-list');
     const toggleBtn = headerElem.querySelector('.toggle-btn');
-    
-    if (videosGrid.classList.contains('collapsed')) {
-      videosGrid.classList.remove('collapsed');
+
+    if (videoList.classList.contains('collapsed')) {
+      videoList.classList.remove('collapsed');
       toggleBtn.style.transform = 'rotate(90deg)';
     } else {
-      videosGrid.classList.add('collapsed');
+      videoList.classList.add('collapsed');
       toggleBtn.style.transform = 'rotate(0deg)';
     }
   }
 </script>
-
 {% endblock %}
