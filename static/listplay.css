@@ -1,5 +1,5 @@
 .playlist-container {
-  background: linear-gradient(to right, #1c1c1e, #232325);
+  background: linear-gradient(to right, #fdfdff, #dadadd);
   margin: 1.5rem auto;
   padding: 1.5rem;
   border-radius: 16px;
@@ -26,7 +26,7 @@
 
 .playlist-header h3 {
   font-size: 1.4rem;
-  color: #ffffff;
+  color: #000000;
   flex: 1 1 100%; /* full width on small screens */
   margin: 0 0 0.5rem 0;
 }
@@ -37,7 +37,7 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: white;
+  color: rgb(0, 0, 0);
   transition: transform 0.3s;
   flex: 1 1 auto;
   min-width: 0;
@@ -68,7 +68,7 @@
 .toggle-btn {
   background: none;
   border: none;
-  color: #ccc;
+  color: #000000;
   font-size: 1.6rem;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -90,7 +90,7 @@
 
 .video-list-item {
   padding: 0.75rem 0;
-  border-bottom: 1px solid #2c2c2e;
+  border-bottom: 1px solid #ffffff;
 }
 
 .video-list-item a {
@@ -98,7 +98,7 @@
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
-  color: #e0e0e0;
+  color: #000000;
   font-size: 0.95rem;
   padding: 0.3rem 0.5rem;
   border-radius: 8px;
@@ -118,7 +118,7 @@
 
 .video-duration,
 .video-time {
-  color: #bbb;
+  color: #000000;
   font-size: 0.9rem;
   min-width: 50px;
   text-align: right;
