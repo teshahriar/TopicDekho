@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, session, flash, url_for
+from flask import Flask, render_template, request, redirect, session, flash, url_for, send_file
 from pymongo import MongoClient
 from datetime import datetime
 from dotenv import load_dotenv
 import os
 from bson import ObjectId
-from bson import SON  
+from io import BytesIO
+import random
+import gridfs
 
 load_dotenv()
 
@@ -17,6 +19,7 @@ db = client["topicdekho"]
 videos = db["videos"]
 request_collection = db['request']  
 playlists_collection = db['playlists']
+helpers_collection = db["helpers"]
 
 # Admin credentials
 ADMIN_USERNAME = "admin"
@@ -50,7 +53,37 @@ def search():
     results = list(results_cursor)
     return render_template("search.html", videos=results, query=query)
 
+DEFAULT_IMAGES = {
+    "Male": "https://i.postimg.cc/K84QRRxZ/20424738-removebg-preview.png",
+    "Female": "https://i.postimg.cc/tCB2qh0S/20424735-removebg-preview.png"
+}
 
+@app.route("/helpers")
+def helpers():
+    helpers = list(helpers_collection.find({}, {"_id": 0}))
+    random.shuffle(helpers)
+    return render_template("helpers.html", helpers=helpers)
+
+@app.route("/addhelper", methods=["GET", "POST"])
+def add_helper():
+    if request.method == "POST":
+        name = request.form["name"]
+        gender = request.form["gender"]
+        contact = request.form.get("contact", "No Contact")
+
+        image_url = DEFAULT_IMAGES.get(gender, DEFAULT_IMAGES["Male"])
+
+        helper = {
+            "name": name,
+            "gender": gender,
+            "contact": contact if contact else "No Contact",
+            "image_url": image_url
+        }
+        helpers_collection.insert_one(helper)
+
+        return redirect(url_for("helpers"))
+
+    return render_template("add_helper.html")
 
 @app.route('/watch/<video_id>')
 def watch(video_id):
