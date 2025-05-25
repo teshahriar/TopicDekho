@@ -6,4 +6,3 @@ Werkzeug
 itsdangerous
 click
 gunicorn
-python-dotenv
