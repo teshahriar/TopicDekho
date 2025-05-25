@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='helpers.css') }}">
+{% endblock %}
+
+{% block content %}
+  <h1 style="text-align:center;">All Helpers</h1>
+  <div class="container">
+    {% for helper in helpers %}
+      <div class="card" onclick="toggleContact(this)">
+        <img src="{{ helper.image_url }}" alt="{{ helper.name }}">
+        <h3>{{ helper.name }}</h3>
+        <div class="contact">
+          {{ helper.contact if helper.contact else 'No Contact' }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    function toggleContact(card) {
+      const contact = card.querySelector('.contact');
+      contact.style.display = contact.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+{% endblock %}
