@@ -22,11 +22,12 @@
     {% if session.get('admin') %}
       <a href="/admin/dashboard">Dashboard</a>
       <a href="/create_playlist">Create playlist</a>
+      <a href="/addhelper">Add Helpers</a>
       <a href="/admin/logout">Logout</a>
     {% else %}
       <a href="/listplay"><i class="fa-solid fa-rectangle-list"></i> Listplay</a>
       <a href="/request"><i class="fa-solid fa-bullhorn"></i> Request for TopicDekho</a>
-      <a href="/admin/login"><i class="fa-solid fa-upload"></i> Admin</a>
+      <a href="/helpers"><i class="fa-regular fa-id-badge"></i> Our Members</a>
     {% endif %}
   </nav>
   <hr />
